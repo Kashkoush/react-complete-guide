@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -60,10 +59,6 @@ class App extends Component {
       border: '0px',
       padding: '8px',
       cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     }
 
     let persons = null;
@@ -84,10 +79,6 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
 
     }
 
@@ -107,19 +98,16 @@ class App extends Component {
 
     return (
       // JSX 
-      // StyleRoot Enabled for the entire app
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React APP</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-          <button style={style}
-            onClick={this.togglePersonHandler}>Toogle Persons</button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React APP</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
+        <button style={style}
+          onClick={this.togglePersonHandler}>Toogle Persons</button>
+        {persons}
+      </div>
     );
   }
   // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'))
 }
 
-export default Radium(App);
+export default App;
