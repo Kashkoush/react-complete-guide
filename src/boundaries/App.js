@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import classes from './App.module.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -53,50 +54,21 @@ class App extends Component {
   render() {
 
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
-      persons = (
-        // Same as using React.createElement()
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              click={this.deletePersonHandler.bind(this, index)}
-              changed={(event) => this.nameChangeHandler(event, person.id)}
-              name={person.name}
-              age={person.age}
-              key={person.id} />
-          })}
-        </div>
-      );
-
-      btnClass = classes.Red;
-
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangeHandler} />
     }
-
-    // we use join to seperate them by a space
-    // let classes = ['red', 'bold'].join(' '); // "red bold"
-
-    const assignedClasses = [];
-
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red); // classes = ['red']
-      // Was assignedClasses.push( 'red' );
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
-      // Was assignedClasses.push( 'bold' );
-    }
-
-    // assignedClasses.join(' '); // "red bold"
 
     return (
       // JSX 
       <div className={classes.App}>
-        <h1>Hi, I'm a React APP</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!</p>
-        <button className={btnClass}
-          onClick={this.togglePersonHandler}>Toogle Persons</button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons} 
+          clicked={this.togglePersonHandler}/>
         {persons}
       </div>
     );
